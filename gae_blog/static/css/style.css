@@ -1,0 +1,97 @@
+/* Liked the color scheme from Sublime Text so using it here */
+:root {
+  --background-color: hsl(70, 8%, 15%);
+  --body-color: hsl(0, 0%, 97%); 
+  --header-background-color:  hsl(0, 0%, 0%);
+  --header-color:  hsl(0, 0%, 97%); 
+  --header-color-a: hsl(54, 70%, 68%); 
+  --header-color-dropdown-a:  hsl(32, 98%, 56%);
+  --footer-background-color: hsl(60, 17%, 11%); 
+  --footer-color: hsl(0, 0%, 97%);; 
+  --footer-color-a:  hsl(54, 70%, 68%); 
+  --footer-color-a-hover:  hsl(190, 81%, 67%);
+  --col-form-label-color: hsl(54, 70%, 68%); 
+
+  --post-title-color-a: hsl(54, 70%, 68%); 
+  --post-title-color-a-hover:  hsl(190, 81%, 67%);
+  --publish-date-color: hsl(338, 95%, 56%);
+}
+
+
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: var(--background-color);
+}
+body {
+  margin-bottom: 60px;
+  background-color: var(--background-color);
+  color: var(--body-color); 
+}
+
+main > .container {
+  padding: 120px 15px 0;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--footer-background-color);
+  color: var(--footer-color);
+  text-align: center;
+}
+
+/* On anything larger than a phone but smaller than a desktop */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+  .footer{text-align: left;}
+}
+
+footer a {
+    color: var(--footer-color-a);
+}
+footer a:hover {
+    color: var(--footer-color-a-hover);
+}
+
+
+.col-form-label{color: var(--col-form-label-color);} 
+
+#navbar-region{min-height: 60px;}
+#navbar-region{background-color: var(--header-background-color); color: var(--header-color);}
+#navbar-region a  {color: var(--header-color-a);}
+.navbar-brand{font-size: 2em;}
+
+.div-posts-table{margin-top:25px;}
+.div-posts-table table{background-color: #DCDCDC;}
+.div-posts-table table > thead {border-bottom: 1px solid;}
+.div-posts-table table > thead > tr > th,  .div-posts-table table > tbody > tr > td {
+    padding: 5px 8px 5px 8px;   
+}
+.div-posts-table table > tbody > tr:nth-child(1) > td {padding-top: 15px  }
+
+.posts-table img{width:20px; height:20px;}
+.posts-table span {padding: 5px; margin: 5px; cursor: pointer;}
+.posts-table span:nth-child(1) {padding-left: 0; }
+.empty-table td{padding-top:10px !important; padding-bottom:10px !important; padding-left:10px; font-size: 1.2em;}
+
+.powered_by{color:  hsl(190, 81%, 67%); }
+.li_powered_by{margin-top: 5px;}
+/* On anything larger than a phone */
+@media (min-width: 768px) { 
+  .li_powered_by{margin-top:  unset;}
+}
+
+.archive{
+  /*list-style: none;*/
+  padding-left: 1rem;
+  
+}
+.archive a{
+  color: hsl(338, 95%, 56%);
+}
+
+.archive a:hover{
+  color: hsl(54, 70%, 68%);
+}

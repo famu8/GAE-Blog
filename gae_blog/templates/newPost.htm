@@ -1,0 +1,100 @@
+{% extends "base_template.htm" %}
+
+{% block title %}Blogging Platform on GAE{% endblock %}
+
+
+{% block page_specific_js %} 
+    <script type="text/javascript" src="/static/ckeditor/ckeditor.js" > </script>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            
+            CKEDITOR.replace( 'blogPostBody' );
+
+            document.getElementById("btnCancel").onclick = function(){
+                window.location.replace("/admin/");
+            }
+        });
+    </script>
+    
+{% endblock %}
+
+{% block maincontent %}
+<div class="container">    
+    <form {% if blogPost.key %} action="/admin/post/save/{{blogPost.key.id()}}/" 
+        {% else %} action="/admin/post/save/" {% endif %} 
+        method="post" name="blogPost" enctype="multipart/form-data">
+
+        <!-- Row for toolbar -->
+        <div class="manage-buttons border-bottom border-danger pb-2">
+            <div>
+                <span><input class="checkboxes" type="checkbox" name="draft" {% if blogPost.isDraft == true %} checked="checked" {% endif %} /> Draft</span> 
+                <span class="px-3">|</span>
+                <span><button type="submit" class="btn btn-secondary btn-sm" id="mySubmit" name="mySubmit">Save</button></span>
+                <span class="px-3">|</span>
+                <span><input type="submit" class="btn btn-secondary btn-sm" id="saveClose" name="saveClose" aria-label="Save and Close" value="Save & Close" /></span>
+                <span><input type="submit" class="btn btn-secondary btn-sm" id="publish" name="publish" aria-label="Publish" value="Publish" /></span>
+                <span><button type="button" class="btn btn-secondary btn-sm" id="btnCancel" aria-label="Cancel">Cancel</button></span>
+            </div>
+            <!-- <div>
+                <ol class="ml-0 pl-3 my-1">
+                    <li class="text-muted" style="font-size: 0.9em;"> Anytime you click 'save and close', the article will automatically be marked as 'draft' even if you didn't tick 'draft'. This way, your changes are not automatically pushed to the outside world (i.e. published).</li>
+                    <li class="text-muted" style="font-size: 0.9em;"> If you make a change to an already published article and just click 'save and close', you get the result from the bullet above.</li>
+                    <li class="text-muted" style="font-size: 0.9em;"> To publish an article, you have to click on 'publish'. </li>
+                </ol>
+            </div> -->
+        </div>
+        <!-- // Row for toolbar -->
+
+        <div class="form-group row mt-3">
+            <label for="title" class="col-sm-2 col-form-label">Post Title</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="title" id="title" required="" {% if blogPost.title %} value="{{blogPost.title}}" {% endif %}>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="articleImage" class="col-sm-2 col-form-label">Image URL</label>
+            <div class="col-sm-7">
+                {% if blogPost.imageURL %}
+                    <div id="previewImage" class="mb-2 previewImage"><img class="mr-2 d-block" src="{{blogPost.imageURL}}" height="150"></div> 
+                {% endif %}
+                
+                <div>
+                    <input type="text" class="form-control imageLink" name="imageURL" id="imageURL" {% if blogPost.imageURL and blogPost.imageURL is not none %} value="{{blogPost.imageURL}}" {% endif %}/>
+                </div> 
+                
+            </div>
+        </div>
+
+        
+        <div class="form-group row mt-3">
+            <label for="imageTitle" class="col-sm-2 col-form-label">Image Title</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="imageTitle" id="imageTitle" {% if blogPost.imageTitle and blogPost.imageTitle is not none %} value="{{blogPost.imageTitle}}" {% endif %}>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="seo_keywords" class="col-sm-2 col-form-label">SEO Keywords</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" {% if blogPost.seo_keywords %} value="{{blogPost.seo_keywords|join(', ')}}" {% endif %}>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3 mb-3">
+            <label for="blogPost" class="col-sm-2 col-form-label" style="font-size: 2.2rem;">Post</label>
+            <div class="col-sm-12" name="blogPost" id="blogPost">
+                <textarea name="blogPostBody" id="blogPostBody" required="" style='width:100%'> {% if blogPost.body %} {{blogPost.body|safe}} {% endif %}</textarea>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+<!-- class="container" -->
+{% endblock %}
+
+
+

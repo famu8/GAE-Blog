@@ -1,0 +1,48 @@
+{% extends "base_template.htm" %}
+<!-- The above command tells the browser we are inheriting the base_template.htm
+    file and the named blocks on this page will go into the corresponding
+    named blocks on that page -->
+
+{% block title %}Admin Page - Blogging Platform on GAE{% endblock %}
+<!-- This will be the title for this page -->
+
+
+{% block maincontent %}
+<div class="container">
+    <div class="col-12 pl-0 div-posts-table" >
+        <!-- Row for toolbar -->
+        <div class="table-toolbar" >
+            <!-- Download your own icons and replace the names -->
+            <div> 
+                <span><a href="/admin/post/create/"><img src="/static/images/plus.svg" title="Create a Post" /></a></span>
+                <span><img src="/static/images/remove.svg" title="Delete Row" id="rowDelete" disabled=""/></span>
+            </div>
+        </div>
+        <!-- // Row for toolbar -->
+        
+        <div class="table-responsive"><table style="width:100%;" class="table">
+            <!-- If we have blog posts, then iterate over the list
+                and display them one by one -->
+            {% if blogPosts  %}
+                <thead>
+                    <tr ><th>Article</th><th>Draft</th><th >Last Modified</th></tr>
+                </thead>
+                <tbody id="tbody" >
+                    {% for k in blogPosts %}
+                        <tr id="{{ k.id }}" >
+                            <td><a href="/admin/post/edit/{{k.key.id()}}/">{{ k.title }} </a></td>
+                            <td> {% if k.isDraft == True %} Y {% endif %}</td>
+                            <td> {{ k.lastModified.strftime("%m/%d/%Y, %H:%M:%S") }} </td> 
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% else %}
+                <tbody class="empty-table"><tr><td> Click on the 'Add' icon to create a blog post.</td></tr></tbody>
+            {% endif %}
+        </table></div>
+
+    </div>
+    
+</div>
+<!-- class="container" -->
+{% endblock %}

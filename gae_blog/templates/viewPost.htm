@@ -1,0 +1,116 @@
+{% extends "base_template.htm" %}
+
+{% block title %}{{ blogPost.title }} {% endblock %}
+{% block  page_specific_css %} 
+    <style> 
+        .postTitle{color: var(--header-color-a);} 
+        .publishDate{color:  hsl(338, 95%, 56%); font-size: 0.9rem;}
+
+        .post_main div.title{width:100%;}
+        .post_main div.empty_image{clear: both;}
+
+        .post_body{text-align: justify;}
+
+        .div_post_image > img{ max-width:700px; max-height: 700px;}
+        
+
+    </style>
+{% endblock %}
+
+{% block seo_keywords %}<meta name="keywords" content="{{', '.join(blogPost.seo_keywords)}}">{% endblock %}
+
+{% block openGraph %}
+    <link rel="canonical" href="/{{blogPost.slug}}/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{blogPost.title|safe}}"  />
+    <meta property="og:description" content="{{blogPost.snippet|replace('\n', ' ', 1)|replace('\r', ' ', 1)}}" />
+    <meta property="og:url" content="/{{blogPost.slug}}/" />
+    <meta property="article:published_time" content="{{blogPost.publishDate.strftime('%Y-%m-%dT%H:%M:%S.%f')}}" />
+    <meta property="article:modified_time" content="{{blogPost.lastModified.strftime('%Y-%m-%dT%H:%M:%S.%f')}}" />
+    <meta name="twitter:card" content="{{twitterCardType}}" />
+    <meta name="twitter:site" content="@{{TWITTER_HANDLE}}" />
+    <meta name="twitter:title" content="{{blogPost.title|safe}}" />
+    <meta name="twitter:description" content="{{blogPost.snippet|replace('\n', ' ', 1)|replace('\r', ' ',1) }}" />
+    <meta name="twitter:image" content="{{twitterCardImage}}" />
+    <meta name="twitter:image:alt" content="{{blogPost.title}}" />
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{BLOG_TITLE}}",
+                "logo": "/apple-touch-icon-180x180-precomposed.png"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "{{BLOG_TITLE}}",
+                "image": {
+                    "@type": "ImageObject",
+                    "url": "/apple-touch-icon-180x180-precomposed.png",
+                    "width": 700,
+                    "height": 666
+                },
+                "url": "{{PUBLISHED_BLOG_URL}}/",
+                "sameAs": [
+                    "https://twitter.com/{{TWITTER_HANDLE}}"
+                ]
+            },
+            "headline": "{{blogPost.title}}",
+            "url": "/{{blogPost.slug}}/",
+            "datePublished": "{{blogPost.publishDate.strftime('%Y-%m-%dT%H:%M:%S.%f')}}", 
+            "dateModified": "{{blogPost.lastModified.strftime('%Y-%m-%dT%H:%M:%S.%f')}}",
+            "description": "{{blogPost.snippet|replace('\n', ' ', 1)|replace('\r', ' ', 1)}}",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{BLOG_URL}}/"
+            }
+        }
+    </script>
+{% endblock %}
+
+
+{% block maincontent %}
+<div class="container">
+    
+    <div class="row pl-0">
+        <div class="post_main col-sm-9">
+            <div class="title"><h2>{{ blogPost.title|safe }}</h2></div>
+            <div class="post_meta clearfix">
+                <div class="publishDate float-left">{{ blogPost.publishDate.strftime("%m/%d/%Y, %H:%M:%S") }}</div>
+                <div class="social_links float-right mr-lg-3">
+                    <a href="mailto:?subject={{ blogPost.title|safe }}&amp;body={{BLOG_URL}}/{{blogPost.slug}}/" target="_blank"><img src="{{BLOG_URL}}/static/images/envelope.svg" title="Share via Email"/> </a>
+                    <a href="https://www.facebook.com/sharer.php?u={{BLOG_URL}}/{{blogPost.slug}}/" target="_blank" ><img src="/static/images/facebook.svg" title="Share on Facebook"/> </a>
+                    <a href="https://twitter.com/intent/tweet?text={{ blogPost.title|safe }} by @{{TWITTER_HANDLE}}&url={{BLOG_URL}}/{{blogPost.slug}}/" target="_blank"><img src="/static/images/tweet.svg" title="Share on Twitter"/> </a>
+                </div>
+            </div>
+            <br />
+            {% if blogPost.imageURL != none %}
+                <div class="div_post_image"> <img src="{{ blogPost.imageURL }}" alt="{{ blogPost.imageTitle}}"/></div>
+                <div class="div_post_image_title">{{blogPost.imageTitle|safe}}</div>
+            {% else %}
+                <div class="empty_image"></div>
+            {% endif %}
+            <div class="post_body"> {{ blogPost.body|safe }}</div> 
+            
+            <!-- Add a block for comments -->
+
+                        
+        </div>
+        <!-- // post_main -->
+
+        <div class="article_panel col-sm-3">
+            {# {% include subscribe_template %} #}
+        </div>
+        <!-- // article_panel -->
+
+    </div>
+    <!-- // class="col-12 pl-0"-->
+
+
+</div>
+<!-- class="container" -->
+{% endblock %}
+
+
+

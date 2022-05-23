@@ -1,0 +1,63 @@
+{% extends "base_template.htm" %}
+
+{% block title %}Blogging Platform on GAE{% endblock %}
+
+{% block  page_specific_css %} 
+    <style> 
+        .postTitle{color: var(--post-title-color-a);} 
+        .postTitle:hover{color: var(--post-title-color-a-hover);} 
+        .publishDate{color:  var(--publish-date-color); font-size: 0.9rem;}
+
+    </style>
+{% endblock %}
+
+{% block maincontent %}
+
+<div class="container">
+    
+    <div class="row">
+        <div class="article_main col-sm-9">
+            <ul class="articles_home mt-4 pl-0">
+                {% if blogPosts and blogPosts is not none %}   
+                    {% for blogPost in blogPosts %}  
+                        <li class="mb-3"> <a href="/{{blogPost.slug}}/" class="postTitle">{{blogPost.title}} </a>
+                            <div class="publishDate">{{ blogPost.publishDate.strftime("%m/%d/%Y, %H:%M:%S") }}</div>
+                            <div> {{ blogPost.snippet }} </div>
+                        </li> 
+                    {% endfor %}
+                {% else %}
+                    <li> <span style="font-size: 1.2em;">No Posts have been published.</span></li> 
+                {% endif %}
+            </ul>
+            {#
+            {% if next_page and next_page is not none %}
+                <!-- <div class="next_page"><a href="/?next_page={{next_page}}">More Posts</a> </div> -->
+            {% endif %}
+            #}
+        </div>
+
+        <div class="side_panel col-sm-3">
+            <div class="history mt-4">
+                {% if archives %}
+                    <div><h4>Archive</h4></div>
+                    <div>  
+                        <ul class="pl-0 archive">
+                            {% for k, v in archives.items() %}
+                                {% for key, values in v.items() %} 
+                                <li><a href="/archive/{{k}}/{{key}}"> {{month[key]}} {{k}}</a></li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- // class="row"-->
+
+
+</div>
+<!-- class="container" -->
+{% endblock %}

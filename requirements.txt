@@ -1,0 +1,9 @@
+Flask
+google-cloud-storage
+google-cloud-ndb
+# cloud datastore is pinned to less than 2.0 to avoid the error - No module named 'google.cloud.datastore_v1.gapic'
+# See https://github.com/googleapis/python-ndb/issues/568
+google-cloud-datastore>=1.15.3,<2.0 
+itsdangerous
+requests
+python-slugify

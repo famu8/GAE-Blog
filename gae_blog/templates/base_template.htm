@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{BLOG_DESCRIPTION}}" />
+    {% block seo_keywords %} {% endblock %}
+    <!-- When we publish an article, we can specify seo_keywords for that
+        article via the block called seo_keywords -->
+
+    <meta name="author" content="NoCommandLine">
+    <meta name="format-detection" content="telephone=no">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- This is where your page title will go  -->
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed/" title="RSS Feed">
+    <link rel="shortcut icon" href="/favicon.ico"> 
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="/static/css/style.css?v2.5" rel="stylesheet">
+    <!-- style.css is your site-wide css -->
+    
+    {% block  page_specific_css %} {% endblock %} 
+    <!-- If a page requires some custom css (i.e. css not applicable to other pages), 
+        it will be inserted in the above block called page_specific_css -->
+
+    {% block openGraph %}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{BLOG_TITLE}}" />
+    <meta property="og:description" content="{{BLOG_DESCRIPTION}}" />
+    <meta property="og:url" content="{{BLOG_URL}}/" />
+    <meta property="og:image" content="{{BLOG_IMAGE}}" />
+    <meta property="twitter:image" content="{{BLOG_IMAGE}}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{TWITTER_HANDLE}}" />
+    <meta name="twitter:title" content={{BLOG_TITLE}} />
+    <meta name="twitter:description" content="{{BLOG_DESCRIPTION}}" /> 
+
+    {% endblock %}
+    <!-- openGraph block is what allows Twitter/Social media sites to display images, 
+        your blog title and other information when your post is shared on 
+        social media -->
+
+</head>
+
+<body>
+    <header > 
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navbar-region">
+            <div class="container">
+                <a class="navbar-brand" href="{{BLOG_URL}}/"> Blogging Platform on GAE</a>
+            </div>
+        </nav>
+    </header>
+
+    <main> 
+        {% block maincontent %} {% endblock %}
+        <!-- This is where the contents of a page will go -->
+    </main>
+
+    
+    <footer class="footer">
+        <div class="container">
+            <ul class="list-inline mt-2 mb-0">
+                <li class="list-inline-item"><a href="{{CONTACT_US_URL}}" target="_blank" title="Email Us" class="mx-1 contact_us" >Email Us</a></li>
+                <li class="list-inline-item mx-1 " style="color:#ffffff;">||</li>
+                <li class="list-inline-item"> <a href="https://twitter.com/{{TWITTER_HANDLE}}" class="mx-1" target="_blank" title="Send us a tweet">Send a Tweet</a> </li>
+                <li class="list-inline-item mx-1 d-none d-sm-inline" style="color:#ffffff;">||</li>
+                <li class="list-inline-item li_powered_by"> <a href="https://github.com/NoCommandLine/NoCommandLine" class="mx-1 powered_by" target="_blank" title="Send us a tweet">Powered by NoCommandLine</a> </li>
+            </ul>
+        </div>
+    </footer>  
+
+    <script src="/static/js/bootstrap.min.js" > </script>
+    {% block page_specific_js %} {% endblock %}
+    <!-- If a page requires some custom javascript (i.e. javascript not applicable to other pages), 
+        it will be inserted in the above block called page_specific_js -->
+</body>
+</html> 

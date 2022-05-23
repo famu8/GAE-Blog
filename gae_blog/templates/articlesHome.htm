@@ -1,0 +1,58 @@
+{% extends base_template %}
+
+{% block title %}Blog - NoCommandLine {% endblock %}
+{% block seo_keywords %}<meta name="keywords" content="Google App Engine, GAE, Google App Engine Launcher, Google App Engine Launcher Replacement, GAE Launcher, Google GUI, GAE GUI"> {% endblock %}
+{% block  pageJS %} 
+    <script src="{{BLOG_BASE_URL}}/static/js/jquery.fittext.js"></script>
+    <script>
+        $(function() {
+            $(".message .btn-close").click(function(){$(this).parent().hide();});
+        });
+    </script>
+{% endblock %}
+
+{% block maincontent %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="col-12 message pl-0 mt-2">
+               {% for category, message in messages %} <div class="message_{{category}}">{{ message|safe }}</div>{% endfor %}
+               <a class="btn-close" style="font-size:14px;"><b>Close</b></a><br/><br/>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+
+    <div class="row">
+        <div class="article_main col-sm-9">
+            <ul class="articles_home mt-4 pl-0">
+                {% if articles and articles is not none %}   
+                    {% for article in articles %}  
+                        <li class="mb-3"> <a href="{{PUBLISHED_BLOG_URL}}/{{article.slug}}/">{% if article.secondaryTitle %} {{article.title}}: {{article.secondaryTitle}} {% else %} {{article.title}} {% endif %}</a>
+                            <div class="post_date_home">{{ momentjs(article.publishDate).format('LLL') }}</div>
+                            <div> {{ article.snippet }} </div>
+                        </li> 
+                    {% endfor %}
+                {% else %}
+                    <li> <span style="font-size: 1.2em;">No Articles have been published.</span></li> 
+                {% endif %}
+            </ul>
+            {% if next_page and next_page is not none %}
+                <div class="next_page"><a href="{{PUBLISHED_BLOG_URL}}/?next_page={{next_page}}">More Articles</a> </div>
+            {% endif %}
+        </div>
+
+        <div class="article_panel col-sm-3">
+            {% include subscribe_template %}
+        </div>
+    </div>
+
+    <!-- // class="row"-->
+
+
+</div>
+<!-- class="container" -->
+{% endblock %}
+
+
+
