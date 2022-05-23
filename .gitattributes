@@ -1,1 +1,1 @@
-*.python linguist-detectable=true *.js linguist-detectable=true *.html linguist-detectable=true *.php linguist-detectable=false
+*.python linguist-detectable=true
