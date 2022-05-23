@@ -13,18 +13,18 @@
 # limitations under the License.
 # [START gae_python37_app]
 
-import blogging_platform
+import gae_blog
 
 # This method allows you to run the App via Flask by calling python main.py
 # or by using dev_appserver.py
 if __name__ == '__main__':
-    app = blogging_platform.create_app()
+    app = gae_blog.create_app()
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
     # can be configured by adding an `entrypoint` to app.yaml.
     app.run(host='127.0.0.1', port=57080, debug=True)
 
 else:
-    app = blogging_platform.create_app()
+    app = gae_blog.create_app()
 
 # [END gae_python37_app]
