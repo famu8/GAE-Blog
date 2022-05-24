@@ -310,16 +310,7 @@ def create_app():
 		return render_template("viewPost.htm", **params)
 		
 
-	@app.route("/test/")
-	def testUpdatePublishDate():
-		blogPost = BlogPosts.get_by_id(4) 			
-		if blogPost:
-			blogPost.publishDate = datetime.datetime(2022, 4, 20, 3, 9, 23, 455101)
-			key = blogPost.put()
-
-		return "All Done"
-
-
+	
 	@app.errorhandler(404)
 	def page_not_found(e):
 		return render_template("404.htm"), 404
