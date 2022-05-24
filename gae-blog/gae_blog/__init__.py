@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 import os
 import traceback
 from flask import Flask, request, redirect, render_template, Response, url_for, flash, abort
-from gae_blog.models.models import BlogPosts, Comments 
+from gae_blog.models.models import BlogPosts 
 from collections import defaultdict, OrderedDict
 from slugify import slugify
 from html.parser import HTMLParser
@@ -31,10 +31,6 @@ import re
 import datetime
 import json
 
-
-# https://cloud.google.com/appengine/docs/standard/python3/testing-and-deploying-your-app#detecting_application_runtime_environment
-# if not os.getenv('GAE_ENV', '').startswith('standard'):
-# 	os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./service_account/nytcomments-c66069beedaf.json"
 
 from google.cloud import ndb
 ndbClient = ndb.Client()
