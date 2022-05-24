@@ -29,6 +29,7 @@ from html.parser import HTMLParser
 from html import unescape
 import re
 import datetime
+import json
 
 
 # https://cloud.google.com/appengine/docs/standard/python3/testing-and-deploying-your-app#detecting_application_runtime_environment
@@ -217,19 +218,30 @@ def create_app():
 				return redirect("/admin/")
 
 
-		elif action == "delete":
-			id =  request.values.get("id")
-			if id:
-				id = int(id)
-				blogPost = BlogPosts.get_by_id(id)
-				if blogPost:
-					blogPost.delete()
-			else:
-				flash("You did not specify a blog post Id")
+		elif action == "delete" and request.method == "POST":
+			rows4Delete = []
+		
+			objectIds = request.get_json() 
+			objectIds = objectIds["objectIds"]
+			objectIds = objectIds.split(",")
+			objectIds = [a for a in objectIds if a and a != ""]
 
-			redirect("/admin/")
+			for objectId in objectIds:
+				rows4Delete.append(ndb.Key("BlogPosts", int(objectId)))
+
+			try:
+				# logger.info(rows4Delete) # debugging
+				ndb.delete_multi(rows4Delete)
+				output = {"delete_status": "SUCCESS"}
+			except Exception as e:
+				logger.info("While trying to delete blog posts.")
+				logger.error(e)
+				output = {"delete_status": "ERROR"}
+
+			return app.response_class(json.dumps(output), content_type="application/json")
 
 	
+
 	@app.route("/archive/<year>/<month>/")
 	@app.route("/archive/<year>/<month>/<page>/")
 	def archiveHandler(year, month, page=None):
@@ -237,7 +249,7 @@ def create_app():
 			abort(404)
 		
 		params = {}
-		
+
 		blogPosts, next_cursor, more = BlogPosts.getPublishedByDate(int(year), int(month), page)
 		if blogPosts == 'Error':
 			abort(500)
@@ -302,6 +314,14 @@ def create_app():
 		return render_template("viewPost.htm", **params)
 		
 
+	@app.route("/test/")
+	def testUpdatePublishDate():
+		blogPost = BlogPosts.get_by_id(4) 			
+		if blogPost:
+			blogPost.publishDate = datetime.datetime(2022, 4, 20, 3, 9, 23, 455101)
+			key = blogPost.put()
+
+		return "All Done"
 
 
 	@app.errorhandler(404)

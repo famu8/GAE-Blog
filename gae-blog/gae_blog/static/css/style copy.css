@@ -1,20 +1,14 @@
 /* Liked the color scheme from Sublime Text so using it here */
 :root {
   --background-color: hsl(70, 8%, 15%);
-  --body-color: hsl(0, 0%, 97%); 
-  --header-background-color:  hsl(0, 0%, 0%);
-  --header-color:  hsl(0, 0%, 97%); 
-  --header-color-a: hsl(54, 70%, 68%); 
-  --header-color-dropdown-a:  hsl(32, 98%, 56%);
-  --footer-background-color: hsl(60, 17%, 11%); 
-  --footer-color: hsl(0, 0%, 97%);; 
-  --footer-color-a:  hsl(54, 70%, 68%); 
-  --footer-color-a-hover:  hsl(190, 81%, 67%);
-  --col-form-label-color: hsl(54, 70%, 68%); 
+  --footer-background-color: hsl(60, 17%, 11%); /* hsl(70, 8%, 15%);*/
+  --footer-color: hsl(0, 0%, 97%);; /* hsl(60, 30%, 96%);*/
+  --footer-color-a:  hsl(54, 70%, 68%); /* hsl(60, 12%, 79%); */
 
-  --post-title-color-a: hsl(54, 70%, 68%); 
-  --post-title-color-a-hover:  hsl(190, 81%, 67%);
-  --publish-date-color: hsl(338, 95%, 56%);
+  --header-background-color:  hsl(0, 0%, 0%);
+  --header-color:  hsl(0, 0%, 97%); /* hsl(54, 70%, 68%); */
+  --header-color-a: hsl(54, 70%, 68%); /*hsl(32, 98%, 56%);*/
+  --header-color-dropdown-a:  hsl(32, 98%, 56%);
 }
 
 
@@ -26,7 +20,6 @@ html {
 body {
   margin-bottom: 60px;
   background-color: var(--background-color);
-  color: var(--body-color); 
 }
 
 main > .container {
@@ -42,26 +35,18 @@ main > .container {
   color: var(--footer-color);
   text-align: center;
 }
-
-/* On anything larger than a phone but smaller than a desktop */
-@media (min-width: 768px) and (max-width: 991.98px) { 
-  .footer{text-align: left;}
-}
-
 footer a {
     color: var(--footer-color-a);
 }
-footer a:hover {
-    color: var(--footer-color-a-hover);
-}
 
 
-.col-form-label{color: var(--col-form-label-color);} 
 
 #navbar-region{min-height: 60px;}
 #navbar-region{background-color: var(--header-background-color); color: var(--header-color);}
 #navbar-region a  {color: var(--header-color-a);}
-.navbar-brand{font-size: 2em;}
+.navbar-collapse ul.dropdown-menu li a  {color: var(--header-color-dropdown-a) !important;}
+
+.logoText{font-size: 2em;margin-right:10px;}
 
 .div-posts-table{margin-top:25px;}
 .div-posts-table table{background-color: #DCDCDC;}
@@ -76,41 +61,12 @@ footer a:hover {
 .posts-table span:nth-child(1) {padding-left: 0; }
 .empty-table td{padding-top:10px !important; padding-bottom:10px !important; padding-left:10px; font-size: 1.2em;}
 
-.powered_by{color:  hsl(190, 81%, 67%); }
-.li_powered_by{margin-top: 5px;}
-/* On anything larger than a phone */
-@media (min-width: 768px) { 
-  .li_powered_by{margin-top:  unset;}
-}
-
-.archive{
-  /*list-style: none;*/
-  padding-left: 1rem;
-  
-}
-.archive a{
-  color: hsl(338, 95%, 56%);
-}
-
-.archive a:hover{
-  color: hsl(54, 70%, 68%);
-}
 
 
-.for-delete{
-  background-color: #acbad4;
+.forDelete{
+    background-color: #acbad4;
 }
-
-.icon-remove{
-  cursor:pointer;
+.fa-remove{
+    color:red;
+    cursor:pointer;
 }
-
-.icon-disabled {
-  opacity: 0.4;
-  cursor: none;
-  pointer-events: none;
-}
-
-table.delete_rows_table tbody tr{cursor: pointer;}
-.modal-backdrop {background-color: var(--background-color);}
-.modal {color:  var(--background-color);}

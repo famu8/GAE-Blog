@@ -6,6 +6,7 @@
 {% block title %}Admin Page - Blogging Platform on GAE{% endblock %}
 <!-- This will be the title for this page -->
 
+{% block page_specific_js %} <script type="text/javascript" src="/static/js/admin.js" > </script> {% endblock %}
 
 {% block maincontent %}
 <div class="container">
@@ -15,12 +16,12 @@
             <!-- Download your own icons and replace the names -->
             <div> 
                 <span><a href="/admin/post/create/"><img src="/static/images/plus.svg" title="Create a Post" /></a></span>
-                <span><img src="/static/images/remove.svg" title="Delete Row" id="rowDelete" disabled=""/></span>
+                <span><img src="/static/images/remove.svg" title="Delete Row" id="postsDelete" disabled="" class="icon-disabled icon-remove"/></span>
             </div>
         </div>
         <!-- // Row for toolbar -->
-        
-        <div class="table-responsive"><table style="width:100%;" class="table">
+        <!-- <div class="table-responsive"><table style="width:100%;" id="productsTable" class="table filterable_table delete_rows_table"> -->
+        <div class="table-responsive"><table style="width:100%;" class="table delete_rows_table">
             <!-- If we have blog posts, then iterate over the list
                 and display them one by one -->
             {% if blogPosts  %}
@@ -29,7 +30,7 @@
                 </thead>
                 <tbody id="tbody" >
                     {% for k in blogPosts %}
-                        <tr id="{{ k.id }}" >
+                        <tr id="{{ k.key.id() }}" >
                             <td><a href="/admin/post/edit/{{k.key.id()}}/">{{ k.title }} </a></td>
                             <td> {% if k.isDraft == True %} Y {% endif %}</td>
                             <td> {{ k.lastModified.strftime("%m/%d/%Y, %H:%M:%S") }} </td> 
@@ -42,7 +43,23 @@
         </table></div>
 
     </div>
-    
+
+    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title" id="confirmDeleteLabel">Delete Rows?</h5></div>
+                <div class="modal-body">
+                    The selected rows will be permanently deleted. Proceed?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmDelete">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <!-- class="container" -->
 {% endblock %}
