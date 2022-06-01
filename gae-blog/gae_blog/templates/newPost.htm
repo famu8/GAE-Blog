@@ -36,20 +36,13 @@
                 <span><input type="submit" class="btn btn-secondary btn-sm" id="publish" name="publish" aria-label="Publish" value="Publish" /></span>
                 <span><button type="button" class="btn btn-secondary btn-sm" id="btnCancel" aria-label="Cancel">Cancel</button></span>
             </div>
-            <!-- <div>
-                <ol class="ml-0 pl-3 my-1">
-                    <li class="text-muted" style="font-size: 0.9em;"> Anytime you click 'save and close', the article will automatically be marked as 'draft' even if you didn't tick 'draft'. This way, your changes are not automatically pushed to the outside world (i.e. published).</li>
-                    <li class="text-muted" style="font-size: 0.9em;"> If you make a change to an already published article and just click 'save and close', you get the result from the bullet above.</li>
-                    <li class="text-muted" style="font-size: 0.9em;"> To publish an article, you have to click on 'publish'. </li>
-                </ol>
-            </div> -->
         </div>
         <!-- // Row for toolbar -->
 
         <div class="form-group row mt-3">
             <label for="title" class="col-sm-2 col-form-label">Post Title</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" name="title" id="title" required="" {% if blogPost.title %} value="{{blogPost.title}}" {% endif %}>
+                <input type="text" class="form-control" name="title" id="title" required="" {% if blogPost.title %} value="{{blogPost.title}}" {% endif %} placeholder="Bing will flag a title > 70 characters in length.">
             </div>
         </div>
 
@@ -82,7 +75,14 @@
             </div>
         </div>
 
-        <div class="form-group row mt-3 mb-3">
+        <div class="form-group row mt-3">
+            <label for="summary" class="col-sm-2 col-form-label">Summary</label>
+            <div class="col-sm-7">
+                <textarea name="summary" id="summary" style='width:100%' rows="2" cols="80" maxlength="160" placeholder="A summary of the post (max of 160 xters). It goes into the description meta field & is used for SEO">{% if blogPost.summary %}{{blogPost.summary|safe}}{% endif %}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group row mt-2 mb-3">
             <label for="blogPost" class="col-sm-2 col-form-label" style="font-size: 2.2rem;">Post</label>
             <div class="col-sm-12" name="blogPost" id="blogPost">
                 <textarea name="blogPostBody" id="blogPostBody" required="" style='width:100%'> {% if blogPost.body %} {{blogPost.body|safe}} {% endif %}</textarea>

@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 import os
 import traceback
 from flask import Flask, request, redirect, render_template, Response, url_for, flash, abort
-from gae_blog.models.models import BlogPosts 
+from blogging_platform.models.models import BlogPosts 
 from collections import defaultdict, OrderedDict
 from slugify import slugify
 from html.parser import HTMLParser
@@ -30,6 +30,7 @@ from html import unescape
 import re
 import datetime
 import json
+
 
 
 from google.cloud import ndb
@@ -41,7 +42,6 @@ MONTH_NAME = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 6:'June'
 		10:'October', 11:'November', 12:'December'}
 
 
-# # https://cloud.google.com/appengine/docs/standard/python/migrate-to-python3/migrate-to-cloud-ndb#using_a_runtime_context_with_wsgi_frameworks
 def ndb_wsgi_middleware(wsgi_app):
 	def middleware(environ, start_response):
 		with ndbClient.context():
@@ -59,8 +59,6 @@ def byDate():
 # We need to strip out any HTML tags before creating the snippet
 class MLStripper(HTMLParser):
 	def __init__(self):
-		#Since Python 3, we need to call the __init__() function 
-		#of the parent class
 		super().__init__()
 		self.reset()
 		self.fed = []
@@ -162,6 +160,10 @@ def create_app():
 			image_url =  request.values.get("imageURL")
 			image_title =  request.values.get("imageTitle")
 			saveAndClose = request.values.get("saveClose", None)
+			summary = request.values.get("summary", None)
+			if summary: 
+				summary.strip()
+			
 			publishDate = None
 			slug = slugify(title)
 			
@@ -196,11 +198,12 @@ def create_app():
 				blogPost.seo_keywords = seo_keywords
 				blogPost.publishDate = publishDate
 				blogPost.slug = slug
+				blogPost.summary = summary
 				
 			else:
 				# This is a new blogPost.
 				blogPost = BlogPosts(title=title, body=body, isDraft=draft, imageURL=image_url, 
-					imageTitle= image_title, seo_keywords=seo_keywords, publishDate=publishDate, slug=slug) 
+					imageTitle= image_title, seo_keywords=seo_keywords, publishDate=publishDate, slug=slug, summary = summary) 
 			
 			key = blogPost.put()
 			
@@ -226,7 +229,6 @@ def create_app():
 				rows4Delete.append(ndb.Key("BlogPosts", int(objectId)))
 
 			try:
-				# logger.info(rows4Delete) # debugging
 				ndb.delete_multi(rows4Delete)
 				output = {"delete_status": "SUCCESS"}
 			except Exception as e:

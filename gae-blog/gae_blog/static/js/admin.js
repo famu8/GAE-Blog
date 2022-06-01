@@ -8,8 +8,8 @@ document.querySelectorAll(".delete_rows_table tbody tr").forEach(function(elemen
 
 // Adds/Removes the delete class from a table row
 function toggleDelete(e){
-    e.preventDefault()
     if (e.target.parentNode.tagName == "TR"){
+        e.preventDefault();
         const parentElem = e.target.parentNode;
         parentElem.classList.toggle('for-delete');
         //parentElem.classList.toggle('row-disabled');
@@ -29,7 +29,6 @@ function toggleDisableDelete(){
 
 // Display a confirmation popup when user clicks the delete icon
 document.getElementById("postsDelete").onclick = function(e){
-    //const deleteModal = new bootstrap.Modal(document.getElementById("confirmDelete"), {});
     deleteModal.show();
     
 };
@@ -55,7 +54,7 @@ function deleteRows(){
         'Content-Type': 'application/json'
       },
 
-      //make sure to serialize your JSON body
+      //Make sure to serialize your JSON body
       body: JSON.stringify({
         objectIds: rows4Delete.toString()
       })

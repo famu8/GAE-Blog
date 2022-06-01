@@ -1,6 +1,10 @@
 {% extends "base_template.htm" %}
 
 {% block title %}{{ blogPost.title }} {% endblock %}
+{% block description %}
+    {% if blogPost.summary %}<meta name="description"  content="{{blogPost.summary|safe}}" />
+    {% else %} <meta name="description" content="{{blogPost.snippet|replace('\n', ' ', 1)|replace('\r', ' ', 1)}}"/> {% endif %}  
+{% endblock %}
 {% block  page_specific_css %} 
     <style> 
         .postTitle{color: var(--header-color-a);} 
@@ -75,7 +79,7 @@
     
     <div class="row pl-0">
         <div class="post_main col-sm-9">
-            <div class="title"><h2>{{ blogPost.title|safe }}</h2></div>
+            <div class="title"><h1>{{ blogPost.title|safe }}</h1></div>
             <div class="post_meta clearfix">
                 <div class="publishDate float-left">{{ blogPost.publishDate.strftime("%m/%d/%Y, %H:%M:%S") }}</div>
                 <div class="social_links float-right mr-lg-3">

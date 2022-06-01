@@ -15,6 +15,7 @@ class BlogPosts(ndb.Model):
 	lastModified = ndb.DateTimeProperty(auto_now=True) 
 	publishDate = ndb.DateTimeProperty()
 	seo_keywords = ndb.StringProperty(required=False, repeated=True)
+	summary = ndb.StringProperty()
 
 	
 	@classmethod

@@ -4,14 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{BLOG_DESCRIPTION}}" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block description %}<meta name="description" content="{{BLOG_DESCRIPTION}}" /> {% endblock %}
     {% block seo_keywords %} {% endblock %}
     <!-- When we publish an article, we can specify seo_keywords for that
         article via the block called seo_keywords -->
 
     <meta name="author" content="NoCommandLine">
     <meta name="format-detection" content="telephone=no">
-    <title>{% block title %}{% endblock %}</title>
+    
     <!-- This is where your page title will go  -->
     
     <link rel="alternate" type="application/rss+xml" href="/feed/" title="RSS Feed">
