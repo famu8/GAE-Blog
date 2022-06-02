@@ -50,9 +50,15 @@ class BlogPosts(ndb.Model):
 			logging.error(e)
 			return "Error", None, None
 
+
 	@classmethod
 	def getBySlug(cls, slug):
 		return cls.query(cls.slug == slug, cls.isDraft == False).get()
+
+
+	@classmethod
+	def getForSitemap(cls):
+		return cls.query(cls.isDraft == False).order(-cls.publishDate).fetch(projection=[cls.slug, cls.publishDate])
 
 		
 

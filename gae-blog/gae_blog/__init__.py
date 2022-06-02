@@ -30,7 +30,7 @@ from html import unescape
 import re
 import datetime
 import json
-
+from urllib.parse import urlparse
 
 
 from google.cloud import ndb
@@ -313,6 +313,19 @@ def create_app():
 		
 
 	
+	@app.route("/sitemap.xml/")
+	def get_sitemap():
+		o = urlparse(request.url)
+		baseURL = o.scheme + "://" + o.netloc  
+		
+		blogPosts = BlogPosts.getForSitemap()		
+		params = {"blogPosts":blogPosts, 'baseURL':baseURL}
+		resp = Response(render_template("sitemap.xml", **params)) 
+		resp.headers['Content-Type'] = 'application/xml'
+		return resp
+
+
+
 	@app.errorhandler(404)
 	def page_not_found(e):
 		return render_template("404.htm"), 404

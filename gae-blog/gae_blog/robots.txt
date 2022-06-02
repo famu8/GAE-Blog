@@ -1,0 +1,64 @@
+Sitemap: <BLOG_URL>/sitemap_index.xml
+User-Agent: *
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/
+
+User-agent: AdsBot-Google
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+Allow: /static/css/
+Allow: /static/js/
+Disallow: /static/
+Noindex: /static/
+
+
+User-agent: Applebot
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/
+
+
+User-agent: Bingbot
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/
+
+
+User-agent: MSNBot
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/
+
+
+User-agent: Slurp
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/
+
+
+User-agent: Twitterbot
+Allow: /
+Allow: /static/css/
+Allow: /static/images/
+Disallow: /static/
+Noindex: /static/

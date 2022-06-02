@@ -1,6 +1,18 @@
 runtime: python39
 
 handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+  
+- url: /apple-touch-icon\.png
+  static_files: apple-touch-icon.png
+  upload: apple-touch-icon\.png
+ 
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+
 - url: /static
   static_dir: gae_blog/static
   expiration: "1h" 
