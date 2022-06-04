@@ -1,4 +1,8 @@
 import logging
+logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+	datefmt='%Y-%m-%d:%H:%M:%S',
+	level=logging.INFO) 
+logger = logging.getLogger(__name__)
 import datetime
 from google.cloud import ndb
 PAGE_SIZE = 25
@@ -25,8 +29,8 @@ class BlogPosts(ndb.Model):
 			return cls.query(cls.isDraft == False).order(-cls.publishDate).fetch_page(PAGE_SIZE, start_cursor=page)
 
 		except Exception as e:
-			logging.info('An error occured')
-			logging.error(e)
+			logger.info('An error occured')
+			logger.error(e)
 			return "Error", None, None
 
 
@@ -46,8 +50,8 @@ class BlogPosts(ndb.Model):
 			return cls.query(cls.isDraft == False, cls.publishDate >= minDate, cls.publishDate < maxDate).order(-cls.publishDate).fetch_page(PAGE_SIZE, start_cursor=page)
 
 		except Exception as e:
-			logging.info('An error occured')
-			logging.error(e)
+			logger.info('An error occured')
+			logger.error(e)
 			return "Error", None, None
 
 
@@ -63,7 +67,7 @@ class BlogPosts(ndb.Model):
 		
 
 class Comments(ndb.Model):
-	post = ndb.KeyProperty(kind = "BlogPost") # This is the Key (Id) to a specific blog post
+	post = ndb.KeyProperty(kind = "BlogPost") 
 	authorName = ndb.StringProperty(required=True)
 	authorEmail = ndb.StringProperty()
 	authorWebsite = ndb.StringProperty()

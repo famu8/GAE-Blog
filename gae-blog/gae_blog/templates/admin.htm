@@ -1,10 +1,6 @@
 {% extends "base_template.htm" %}
-<!-- The above command tells the browser we are inheriting the base_template.htm
-    file and the named blocks on this page will go into the corresponding
-    named blocks on that page -->
 
 {% block title %}Admin Page - Blogging Platform on GAE{% endblock %}
-<!-- This will be the title for this page -->
 
 {% block page_specific_js %} <script type="text/javascript" src="/static/js/admin.js" > </script> {% endblock %}
 
@@ -13,17 +9,14 @@
     <div class="col-12 pl-0 div-posts-table" >
         <!-- Row for toolbar -->
         <div class="table-toolbar" >
-            <!-- Download your own icons and replace the names -->
             <div> 
                 <span><a href="/admin/post/create/"><img src="/static/images/plus.svg" title="Create a Post" /></a></span>
                 <span><img src="/static/images/remove.svg" title="Delete Row" id="postsDelete" disabled="" class="icon-disabled icon-remove"/></span>
             </div>
         </div>
         <!-- // Row for toolbar -->
-        <!-- <div class="table-responsive"><table style="width:100%;" id="productsTable" class="table filterable_table delete_rows_table"> -->
+        
         <div class="table-responsive"><table style="width:100%;" class="table delete_rows_table">
-            <!-- If we have blog posts, then iterate over the list
-                and display them one by one -->
             {% if blogPosts  %}
                 <thead>
                     <tr ><th>Article</th><th>Draft</th><th >Last Modified</th></tr>

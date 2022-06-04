@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 import os
 import traceback
 from flask import Flask, request, redirect, render_template, Response, url_for, flash, abort
-from blogging_platform.models.models import BlogPosts 
+from gae_blog.models.models import BlogPosts 
 from collections import defaultdict, OrderedDict
 from slugify import slugify
 from html.parser import HTMLParser
@@ -307,6 +307,7 @@ def create_app():
 		if not blogPost:
 			abort (404)
 
+		blogPost.snippet = (createSnippet(blogPost.body)).strip()
 		params["blogPost"] = blogPost
 
 		return render_template("viewPost.htm", **params)
