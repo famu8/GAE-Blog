@@ -7,20 +7,17 @@
     <title>{% block title %}{% endblock %}</title>
     {% block description %}<meta name="description" content="{{BLOG_DESCRIPTION}}" /> {% endblock %}
     {% block seo_keywords %} {% endblock %}
-    <!-- When we publish an article, we can specify seo_keywords for that
-        article via the block called seo_keywords -->
+    <!-- When we publish a post, we can specify seo_keywords for that
+        post via the block called seo_keywords -->
 
-    <meta name="author" content="NoCommandLine">
+    <meta name="author" content="">
     <meta name="format-detection" content="telephone=no">
-    
-    <!-- This is where your page title will go  -->
     
     <link rel="alternate" type="application/rss+xml" href="/feed/" title="RSS Feed">
     <link rel="shortcut icon" href="/favicon.ico"> 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">    
     <link href="/static/css/style.css?v2.4" rel="stylesheet">
-    <!-- style.css is your site-wide css -->
-    
+        
     {% block  page_specific_css %} {% endblock %} 
     <!-- If a page requires some custom css (i.e. css not applicable to other pages), 
         it will be inserted in the above block called page_specific_css -->
@@ -36,7 +33,6 @@
     <meta name="twitter:site" content="@{{TWITTER_HANDLE}}" />
     <meta name="twitter:title" content={{BLOG_TITLE}} />
     <meta name="twitter:description" content="{{BLOG_DESCRIPTION}}" /> 
-
     {% endblock %}
     <!-- openGraph block is what allows Twitter/Social media sites to display images, 
         your blog title and other information when your post is shared on 

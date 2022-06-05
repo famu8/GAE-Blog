@@ -89,9 +89,9 @@
                 </div>
             </div>
             <br />
-            {% if blogPost.imageURL != none %}
+            {% if blogPost.imageURL %}
                 <div class="div_post_image"> <img src="{{ blogPost.imageURL }}" alt="{{ blogPost.imageTitle}}"/></div>
-                <div class="div_post_image_title">{{blogPost.imageTitle|safe}}</div>
+                <div class="div_post_image_title mb-4">{{blogPost.imageTitle|safe}}</div>
             {% else %}
                 <div class="empty_image"></div>
             {% endif %}
