@@ -10,7 +10,7 @@ A Google App Engine-based blog application
 
     a. File > Add Existing Application 
     
-    b. In the Application Path, use the file widget to navigate to the folder from bullet 1 and select the `app.yaml` file 
+    b. In the Application Path, use the file widget to navigate to the folder from bullet 'a' and select the `app.yaml` file 
     
     c. Provide a new name for your App 
     
