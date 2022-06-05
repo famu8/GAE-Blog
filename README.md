@@ -2,11 +2,14 @@
 A Google App Engine-based blog application 
 
  - Built with **Python 3.9+ and Flask** 
- - Data is stored in **Google Cloud Datastore** (a.k.a Firestore in Datastore Mode)
+ - Data is stored in **Google Cloud Datastore** (a.k.a Firestore in Datastore Mode) 
+ - You can customize the theme (e.g. change the colors)
+
+<img src="https://storage.googleapis.com/nocommandline-blog.appspot.com/gae_blog_app/home_page.png?latest=true" alt="Sample Blog Home Page Screenshot" title="Sample Blog Home Page Screenshot" style="margin: 0 auto; max-width: 600px">
 
 ## Setup 
 1. Clone the repo or download the source as a zipped file and unzip it to a folder
-2. If you're using the GAE GUI - [NoCommandLine](https://nocommandline.com/), then follow the steps to add an existing project 
+2. If you're using the GAE GUI - [NoCommandLine](https://nocommandline.com/), then follow the steps to add an existing project i.e. 
 
     a. File > Add Existing Application 
     
@@ -37,3 +40,18 @@ A Google App Engine-based blog application
     
     e. Run the app using the command - `python main.py`
  
+
+## Not Covered
+1. Comments Module
+2. Subscribe to Blog Module
+
+## Screenshots
+
+1. ### Admin Page 
+<img src="https://storage.googleapis.com/nocommandline-blog.appspot.com/gae_blog_app/admin_page.png" alt="Admin Page Screenshot" title="Admin Page Screenshot" style="margin: 0 auto; max-width: 600px; margin-bottom:20px;"> 
+
+2. ### New Post 
+<img src="https://storage.googleapis.com/nocommandline-blog.appspot.com/gae_blog_app/new_post_page.png" alt="New Post Page Screenshot" title="New Post Page Screenshot" style="margin: 0 auto; max-width: 600px; margin-bottom:20px;"> 
+
+3. ### Sample Post  
+<img src="https://storage.googleapis.com/nocommandline-blog.appspot.com/gae_blog_app/sample_post.png" alt="Sample Post Screenshot" title="Sample Post Screenshot" style="margin: 0 auto; max-width: 600px; margin-bottom:20px;">
