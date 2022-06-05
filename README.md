@@ -3,7 +3,8 @@ A Google App Engine-based blog application
 
  - Built with **Python 3.9+ and Flask** 
  - Data is stored in **Google Cloud Datastore** (a.k.a Firestore in Datastore Mode) 
- - You can customize the theme (e.g. change the colors)
+ - You can customize the theme (e.g. change the colors) 
+ - Tutorial series can be found [here](https://nocommandline.com/blog/build-host-a-blogging-platform-on-google-app-engine-part-6-view-post-page/)
 
 <img src="https://storage.googleapis.com/nocommandline-blog.appspot.com/gae_blog_app/home_page.png?latest=true" alt="Sample Blog Home Page Screenshot" title="Sample Blog Home Page Screenshot" style="margin: 0 auto; max-width: 600px">
 
