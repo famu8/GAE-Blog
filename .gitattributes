@@ -1,4 +1,2 @@
-# Auto detect text files and perform LF normalization
-* text=auto
 gae-blog/gae_blog/static/ckeditor/samples/old/* linguist-vendored=true
 
