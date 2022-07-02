@@ -13,16 +13,19 @@
 # limitations under the License.
 # [START gae_python37_app]
 
+import argparse
 import gae_blog
 
 # This method allows you to run the App via Flask by calling python main.py
 # or by using dev_appserver.py
 if __name__ == '__main__':
+     # Executed if you run 'python main.py'
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--port', default="8080")
+    parser.add_argument('--host', default="127.0.0.1")
+    args = vars(parser.parse_args())
     app = gae_blog.create_app()
-    # This is used when running locally only. When deploying to Google App
-    # Engine, a webserver process such as Gunicorn will serve the app. This
-    # can be configured by adding an `entrypoint` to app.yaml.
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    app.run(host=args["host"], port=args["port"], debug=True)
 
 else:
     app = gae_blog.create_app()
