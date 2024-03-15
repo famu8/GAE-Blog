@@ -21,7 +21,7 @@ import gae_blog
 if __name__ == '__main__':
      # Executed if you run 'python main.py'
     parser = argparse.ArgumentParser()
-    parser.add_argument('--port', default="8080")
+    parser.add_argument('--port', default="61080")
     parser.add_argument('--host', default="127.0.0.1")
     args = vars(parser.parse_args())
     app = gae_blog.create_app()
